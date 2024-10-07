@@ -1,10 +1,10 @@
 @section('header')
 
-    <header class="p-4 border-b-2 border-gray-600 mb-12">
+    <header class="p-4 bg-white shadow-md mb-12">
         <div class="flex justify-evenly items-center">
             <div class="flex items-center space-x-4">
                 <div class="logo">
-                    <h2 class="font-bold text-xl">Test-hh</h2>
+                    <h2 class="font-bold text-2xl text-gray-700">Test-hh</h2>
                 </div>
             </div>
 
