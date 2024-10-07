@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Cart\StoreRequest;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
+
+        return view('carts.index', compact('cartItems'));
     }
 
     /**
@@ -27,7 +30,7 @@ class CartController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -89,6 +92,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::destroy($id);
+        return redirect()->route('carts.index');
     }
 }

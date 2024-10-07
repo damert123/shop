@@ -17,7 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->index()->constrained('users');
             $table->dateTime('date');
-            $table->integer('price')->nullable();
+            $table->jsonb('products');
+            $table->integer('price');
             $table->timestamps();
         });
     }

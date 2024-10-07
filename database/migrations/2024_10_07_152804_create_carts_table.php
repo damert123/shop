@@ -15,8 +15,8 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->index()->constrained();
+            $table->foreignId('product_id')->constrained();
             $table->integer('quantity')->default(1);
             $table->timestamps();
         });

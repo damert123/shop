@@ -26,7 +26,7 @@
                     </form>
 
                 @else
-                    <a href="{{ route('login') }}" class="px-4 py-2 text-gray-800 bg-gray-200 rounded-md hover:bg-gray-300 transition">Войти</a>
+                    <a href="{{ route('login') }}" class="px-4 py-2 text-gray-800 bg-black rounded-md hover:bg-gray-300 transition">Войти</a>
                 @endif
             </div>
         </div>

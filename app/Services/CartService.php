@@ -21,8 +21,6 @@ class CartService
             $data['user_id'] = $userId;
             return Cart::create($data);
         }
-
-
     }
 
 }

@@ -25,9 +25,11 @@ Route::get('/main', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
+
+
 Route::resource('products', ProductController::class);
 Route::apiResource('orders', OrderController::class);
-Route::apiResource('carts', CartController::class);
+Route::resource('carts', CartController::class);
 
 
 

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Order\StoreRequest;
 use App\Http\Resources\OrderResource;
+use App\Models\Cart;
 use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,9 +18,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = OrderResource::collection(auth()->user()->orders);
+        $orders = OrderResource::collection(auth()->user()->orders)->resource;
 
-        return view('order.index', compact('orders'));
+        $totalOrderPrice = $orders->sum('price');
+
+        return view('orders.index', compact('orders', 'totalOrderPrice'));
     }
 
     /**
@@ -36,9 +41,20 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+
+        $cartItems = auth()->user()->cart()->get()->toArray();
+
+        if (empty($cartItems)) {
+            return redirect()->route('carts.index')->with('error', 'Корзина пуста');
+        }
+
+        OrderService::create($cartItems);
+
+        return redirect()->route('carts.index')->with('success', 'Заказ успешно создан');
+
+
     }
 
     /**
