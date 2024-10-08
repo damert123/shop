@@ -16,20 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('main.index');
+//});
 
-Route::get('/main', function () {
+Route::get('/', function () {
     return view('main.index');
-})->middleware(['auth'])->name('dashboard');
+})->name('dashboard');
 
 
 
 
 Route::resource('products', ProductController::class);
-Route::apiResource('orders', OrderController::class);
-Route::resource('carts', CartController::class);
+Route::apiResource('orders', OrderController::class)->middleware('auth');
+Route::resource('carts', CartController::class)->middleware('auth');
 
 
 

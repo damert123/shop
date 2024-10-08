@@ -20,6 +20,10 @@ class CartController extends Controller
     {
         $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
 
+        CartService::calculateTotalPrice($cartItems);
+
+
+
         return view('carts.index', compact('cartItems'));
     }
 
@@ -93,6 +97,6 @@ class CartController extends Controller
     public function destroy($id)
     {
         Cart::destroy($id);
-        return redirect()->route('carts.index');
+        return redirect()->route('carts.index')->with('success', 'Товар успешно удален из корзины');
     }
 }

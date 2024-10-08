@@ -50,9 +50,11 @@ class OrderController extends Controller
             return redirect()->route('carts.index')->with('error', 'Корзина пуста');
         }
 
-        OrderService::create($cartItems);
+        $order = OrderService::create($cartItems);
 
-        return redirect()->route('carts.index')->with('success', 'Заказ успешно создан');
+
+
+        return redirect()->route('carts.index');
 
 
     }
@@ -99,6 +101,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::destroy($id);
+        return redirect()->route('orders.index')->with('success', 'Заказ успешно отменен');
     }
 }

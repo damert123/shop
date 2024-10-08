@@ -6,6 +6,18 @@
     <div class="w-3/4 mx-auto py-6">
         <h1 class="text-2xl font-bold mb-4">КОРЗИНА</h1>
 
+        @if(session('success'))
+            <div class="bg-green-500 text-white p-4 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="bg-red-500 text-white p-4 rounded-md mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @if($cartItems->isEmpty())
             <p class="text-gray-600">Ваша корзина пуста.</p>
             <a href="{{ route('products.index') }}" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
@@ -27,9 +39,9 @@
                     @foreach($cartItems as $item)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $item->product->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ number_format($item->product->price, 2, ',', ' ') }} ₽</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ number_format($item->product->price) }} ₽</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $item->quantity }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ number_format($item->product->price * $item->quantity, 2, ',', ' ') }} ₽</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $item->totalPrice }} ₽</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                                 <form action="{{ route('carts.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить этот товар из корзины?');">
                                     @csrf
@@ -43,7 +55,7 @@
                 </table>
             </div>
 
-            <h3 class="mt-4 text-lg font-semibold">Общая стоимость: <span class="text-green-600">{{ number_format($cartItems->sum(function($item) { return $item->product->price * $item->quantity; }), 2, ',', ' ') }} ₽</span></h3>
+            <h3 class="mt-4 text-lg font-semibold">Общая стоимость: <span class="text-green-600">{{ number_format($cartItems->sum(function($item) { return $item->product->price * $item->quantity; })) }} ₽</span></h3>
 
             <div class="mt-6 text-center">
                 <form action="{{ route('orders.store') }}" method="post">

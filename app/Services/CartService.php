@@ -23,4 +23,13 @@ class CartService
         }
     }
 
+    public static function calculateTotalPrice($cartItems)
+    {
+        foreach ($cartItems as $item) {
+            $item->totalPrice = number_format($item->product->price * $item->quantity);
+        }
+
+        return $cartItems;
+    }
+
 }
