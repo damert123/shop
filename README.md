@@ -36,7 +36,11 @@
     ```bash
    php artisan migrate
    
-6. **Запустите сервер**
+6. **Сгенерируйте ключ приложения:**
+    ```bash
+   php artisan key:generate
+
+7. **Запустите сервер**
     ```bash
    php artisan serve
     ```
