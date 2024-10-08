@@ -13,7 +13,7 @@
 
 1. **Клонируйте репозиторий**:
    ```bash
-   git clone https://github.com/ваш_логин/ваш_репозиторий.git
+   git clone https://github.com/damert123/shop.git
    cd ваш_репозиторий
 2. **Установите зависимости: Убедитесь, что у вас установлен Composer. Затем выполните:**
     ```bash
